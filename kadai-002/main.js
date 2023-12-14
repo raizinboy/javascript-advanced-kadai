@@ -107,7 +107,10 @@ const rankCheck = (score) => {
 //ゲームを終了
 const gameOver = (id) => {
   clearInterval(id);
+  timeLimit();
+  setTimeout(() => {
   const result = confirm(rankCheck(score));
+  }, 10);
 
   //OKボタンをクリックされたらリロードする
   if(result == true) {
@@ -129,7 +132,7 @@ const timer = () => {
     if (time <= 0) {
       gameOver(id);
     }
-  }, 1000);
+  }, 100);
 };
 
 //タイプ数のカウンターを表示する
