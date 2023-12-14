@@ -108,6 +108,7 @@ const rankCheck = (score) => {
 const gameOver = (id) => {
   clearInterval(id);
   const result = confirm(rankCheck(score));
+
   //OKボタンをクリックされたらリロードする
   if(result == true) {
     window.location.reload();
@@ -136,6 +137,12 @@ const typeCounter = (score) => {
   typecount.textContent = score;
 }
 
+//タイムアップを表示する
+const timeLimit = () => {
+  wrap.textContent='タイムアップ';
+  typedfield.textContent = '';
+  untypedfield.textContent = '';
+}
 
 //キーボードのイベント処理
 document.addEventListener('keypress', keyPress);
@@ -153,6 +160,11 @@ start.addEventListener('click', () => {
 
   // タイプカウンターを表示する
   typeCounter(score);
+
+  //タイムアップを表示する
+  setTimeout(() => {
+    timeLimit();
+  }, 59990);
 
   //キーボードのイベント処理
   document.addEventListener('keypress', keyPress);
