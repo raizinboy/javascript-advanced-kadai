@@ -107,13 +107,11 @@ const rankCheck = (score) => {
 //ゲームを終了
 const gameOver = (id) => {
   clearInterval(id);
-  timeLimit();
-  setTimeout(() => {
   const result = confirm(rankCheck(score));
   //OKボタンをクリックされたらリロードする
   if(result == true) {
     window.location.reload();
-  }}, 10);
+  }
 };
 
 //カウントダウンタイマー
@@ -128,9 +126,13 @@ const timer = () => {
 
     //カウントが0になったらタイマーを停止する
     if (time <= 0) {
+      wrap.textContent='タイムアップ';
+      typedfield.textContent = '';
+      untypedfield.textContent = '';
+      setTimeout(() => {
       gameOver(id);
-    }
-  }, 1000);
+    },10);
+  }}, 100);
 };
 
 //タイプ数のカウンターを表示する
@@ -138,12 +140,6 @@ const typeCounter = (score) => {
   typecount.textContent = score;
 }
 
-//タイムアップを表示する
-const timeLimit = () => {
-  wrap.textContent='タイムアップ';
-  typedfield.textContent = '';
-  untypedfield.textContent = '';
-}
 
 //キーボードのイベント処理
 document.addEventListener('keypress', keyPress);
@@ -161,11 +157,6 @@ start.addEventListener('click', () => {
 
   // タイプカウンターを表示する
   typeCounter(score);
-
-  //タイムアップを表示する
-  setTimeout(() => {
-    timeLimit();
-  }, 59990);
 
   //キーボードのイベント処理
   document.addEventListener('keypress', keyPress);
